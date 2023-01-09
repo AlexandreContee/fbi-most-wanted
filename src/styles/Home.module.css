@@ -33,6 +33,21 @@
   height: 5rem;
 }
 
+#btn {
+  width: 100%;
+  text-align: center;
+}
+
+.container button {
+  background-color: #006bf7;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+  width: 80%;
+}
+
 /*  Loader  */
 
 .loader {

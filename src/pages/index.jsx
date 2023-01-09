@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import WantedPerson from '../components/WantedPerson'
+import axios from "axios"
 
 import styles from '../styles/Home.module.css'
 
@@ -7,17 +8,37 @@ export default function Home() {
 
   const [fbiData, setFbiData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [options, setOptions] = useState(
+    {
+      method: 'GET',
+      url: 'https://api.fbi.gov/wanted/v1/list',
+      params: {
+        page: 1
+      }
+    }
+  )
 
   useEffect(() => {
-    fetch('https://api.fbi.gov/wanted/v1/list')
-      .then((response) => response.json())
-      .then((data) => {
-        setFbiData(data.items)
-      })
+    axios.request(options).then(fetch('https://api.fbi.gov/wanted/v1/list'))
+      .then((response) => setFbiData(response.data.items))
       .finally(() => {
         setIsLoading(false)
       })
-  }, [])
+  }, [options])
+
+  const handleClick = () => {
+    setIsLoading(true)
+    setOptions(
+      {
+        method: 'GET',
+        url: 'https://api.fbi.gov/wanted/v1/list',
+        params: {
+          page: options.params.page + 1
+        }
+      }
+    )
+    window.scrollTo(0, 0)
+  }
 
   return (
     <div className={styles.container}>
@@ -40,7 +61,9 @@ export default function Home() {
           )))
           : null}
       </main>
-
+      <div id={styles.btn}>
+        <button onClick={handleClick}>Next page</button>
+      </div>
       <div className={styles.footerSpaceHold}></div>
       <footer>
         <p>Developed by Alexandre Conte &copy;</p>
