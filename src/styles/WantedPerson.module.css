@@ -1,0 +1,18 @@
+.person {
+  display: flex;
+  flex-direction: column;
+  background-color: #d6d6d6;
+  margin: 15px;
+  width: fit-content;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.person h2 {
+  text-align: center;
+}
+
+.person img {
+  height: auto;
+  margin: auto;
+}
