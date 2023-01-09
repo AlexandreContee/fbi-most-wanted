@@ -26,7 +26,7 @@ export default function Home() {
         <h1>FBI: Most Wanted API</h1>
       </header>
       <main>
-        {isLoading ? <div class={styles.loader}></div> : !!fbiData ? (
+        {isLoading ? <div className={styles.loader}></div> : !!fbiData ? (
           fbiData.map((item) => (
             <WantedPerson
               key={item["@id"]}
